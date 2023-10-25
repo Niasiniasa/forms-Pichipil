@@ -1,0 +1,45 @@
+<div class="text-bg-primary p-3">
+    <h1>Mi formulario</h1>
+    
+    <form [formGroup]="userForm" (ngSubmit)="onsubmit" class="text-bg-info p-3">
+    
+        <!--name control-->
+    
+        <div class="mb-3 row ">
+            <label class="col-sm-2 col-form-label ">nombre</label>
+            <div class="col-sm-10 ">
+              <input formControlName="name" type="text" class="form-control " [ngClass]="{'is-invalid': userForm.controls['name'].invalid && nameControl.touched}" >
+              <div class="invalid-feedback">Nombre requerido</div>
+            </div>
+          </div>
+    
+        <!-- EMAIL-->
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input formControlName="email" type="text" class="form-control" [ngClass]="{'is-invalid': emailControl.invalid && emailControl.touched}" >
+              <div class="invalid-feedback">
+                <ng-container *ngIf="emailControl.errors?.['required']">
+                    Este campo es requerido
+                </ng-container>
+                <ng-container *ngIf="emailControl.errors?.['email']">
+                    Email invalido
+                </ng-container>
+              </div>
+            </div>
+          </div>
+    
+          <!--CONTRASEÑA-->
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input formControlName="password" type="password" class="form-control" id="inputPassword">
+            </div>
+          </div>
+        <button [disabled]="userForm.invalid" (click)="onsubmit()" class="btn btn-light" type="submit">Enviar</button>
+    </form>
+</div>
+
+<!-- {{userForm.controls['name'].errors | json}}
+<hr>
+{{userForm.value | json}} -->
